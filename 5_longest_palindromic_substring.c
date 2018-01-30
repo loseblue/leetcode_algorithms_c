@@ -67,7 +67,7 @@ char* longestPalindrome(char* s)
 {
     int i = 0;
     char* ret = NULL;
-    char* rec = NULL;
+    char* rec = s;
     int step = 0;
     int mode = 0; //0:all 1:1apa  2:appa
     int judge = 0;
@@ -80,6 +80,7 @@ char* longestPalindrome(char* s)
             if (1 == i)
             {
                 max = 1;
+                char* rec = s;
             }
             break;
         }
