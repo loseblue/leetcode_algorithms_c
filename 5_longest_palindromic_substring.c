@@ -1,10 +1,11 @@
 char* rec=NULL;
+
+
 int isPalindromic(char *s, int len, int step, int* mode, int* max)
 {
     char* tail = (s+len);
     int ret = 0;
 
-    printf("tail=%c len=%d step=%d mode=%d max=%d ret=%d rec=%c\n", *tail, len, step, *mode, *max, ret, *rec);
     if (1 == *mode) 
     {
         if (*tail == *(tail-2*step-2)) 
