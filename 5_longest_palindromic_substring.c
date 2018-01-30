@@ -1,4 +1,5 @@
-int isPalindromic(char *s, int len, int step, int* mode, char* rec, int* max)
+char* rec=NULL;
+int isPalindromic(char *s, int len, int step, int* mode, int* max)
 {
     char* tail = (s+len);
     int ret = 0;
@@ -65,7 +66,7 @@ int isPalindromic(char *s, int len, int step, int* mode, char* rec, int* max)
 
         }
     }
-    printf("tail=%c len=%d step=%d mode=%d max=%d ret=%d rec=%c\n\n", *tail, len, step, *mode, *max, ret, *rec);
+    printf("tail=%c len=%d step=%d mode=%d max=%d ret=%d rec=%c\n", *tail, len, step, *mode, *max, ret, *rec);
     return ret;
 }
 
@@ -73,7 +74,6 @@ char* longestPalindrome(char* s)
 {
     int i = 0;
     char* ret = NULL;
-    char* rec = NULL;
     int step = 0;
     int max = 0;
     int mode = 0; //0:all 1:1apa  2:appa
@@ -93,7 +93,7 @@ char* longestPalindrome(char* s)
             break;
         }
 
-        if (0 == isPalindromic(s, i, step, &mode, rec, &max))
+        if (0 == isPalindromic(s, i, step, &mode, &max))
         {
             step++;
         } 
