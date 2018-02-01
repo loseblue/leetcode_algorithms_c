@@ -22,8 +22,11 @@ int test(char* s, char* head, int count, int step, int* max)
     if (*(tail-step-1) == *(tail+step+1)) 
     {
         step++;
-        *max = *max>step ? *max:step;
-        head = tail-step;
+        if (*max<step) 
+        {
+            *max = step;
+            head = tail-step-1;
+        } 
         test(s, head, count, step, max);
     }
     return 1;
@@ -55,6 +58,10 @@ char* longestPalindrome(char* s)
         }
     }
     rec = malloc(sizeof(int)*max+1);
+    memset(rec, 0, sizeof(int)*max+1);
+    memcpy(rec, head, max);
+    printf("%s\n", rec);
+
     memset(rec, 0, sizeof(int)*max+1);
     while (j<max) 
     {
