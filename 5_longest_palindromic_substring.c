@@ -1,3 +1,4 @@
+char* head = NULL;
 void prepareString(char* s, char* des)
 {
     int i = 0;
@@ -10,24 +11,22 @@ void prepareString(char* s, char* des)
     *(des+2*i) = '#';
 }
 
-int test(char* s, char* head, int count, int step, int* max)
+int test(char* s, int count, int step, int* max)
 {
     char* tail = s+count;
-    printf("head=%c, *tail=%c, count=%d, step=%d max=%d\n", *head, *tail, count, step, *max);
-    if (count-step-1<0 || count+step+1>2000-1 || NULL==*(tail+step+1)) 
+    if (count-step-1<0 || count+step+1>2000 || NULL==*(tail+step+1)) 
     {
         return 0;
     } 
-    printf("%c-%c\n", *(tail-step-1), *(tail+step+1));
     if (*(tail-step-1) == *(tail+step+1)) 
     {
         step++;
         if (*max<step) 
         {
             *max = step;
-            head = tail-step-1;
+            head = tail-step;
         } 
-        test(s, head, count, step, max);
+        test(s, count, step, max);
     }
     return 1;
 }
@@ -35,7 +34,6 @@ int test(char* s, char* head, int count, int step, int* max)
 char* longestPalindrome(char* s)
 {
     char des[2000];
-    char* head = NULL;
     char* rec = NULL;
     int i = 0;
     int j = 0;
@@ -47,7 +45,7 @@ char* longestPalindrome(char* s)
     
     for (i = 1; i < 2000; i++) 
     {
-        if (0 == test(des, head, i, step, &max))
+        if (0 == test(des, i, step, &max))
         {
             break;
         }
@@ -58,10 +56,6 @@ char* longestPalindrome(char* s)
         }
     }
     rec = malloc(sizeof(int)*max+1);
-    memset(rec, 0, sizeof(int)*max+1);
-    memcpy(rec, head, max);
-    printf("%s\n", rec);
-
     memset(rec, 0, sizeof(int)*max+1);
     while (j<max) 
     {
